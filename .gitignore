@@ -3,4 +3,5 @@ composer.phar
 .idea
 *.iml
 *.lock
-vendor
+
+.php-version
