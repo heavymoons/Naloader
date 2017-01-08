@@ -1,6 +1,6 @@
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
-         bootstrap="vendor/autoload.php"
+         bootstrap="./vendor/autoload.php"
          cacheTokens="true"
          colors="true"
          convertErrorsToExceptions="true"
@@ -12,7 +12,7 @@
          verbose="false">
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="false">
-            <directory>src/</directory>
+            <directory>./src/</directory>
         </whitelist>
     </filter>
     <testsuite name="Naloader Test Suite">
