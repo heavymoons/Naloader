@@ -59,4 +59,12 @@ class Naloader
         return null;
     }
 
+    /**
+     * unescape htmlencoded text
+     * @param $text
+     * @return string
+     */
+    public static function unescapeText($text) {
+        return html_entity_decode($text);
+    }
 }

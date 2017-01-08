@@ -37,12 +37,12 @@ class Novel
     }
 
     public function parseFromCrawler(Crawler $crawler) {
-        $this->title = $crawler->filter('p.novel_title')->first()->text();
+        $this->title = Naloader::unescapeText($crawler->filter('p.novel_title')->first()->text());
 
         $authorNode = $crawler->filter('div.novel_writername a')->first();
         $authorUrl = $authorNode->attr('href');
         $this->author = new Author($authorUrl);
-        $this->author->name = $authorNode->text();
+        $this->author->name = Naloader::unescapeText($authorNode->text());
 
         $crawler->filter('ul.undernavi a')->each(function(Crawler $node) {
             $linkUrl = $node->attr('href');

@@ -55,7 +55,7 @@ class Chapter
         $aNode = $crawler->filter('a')->first();
         $paths = explode('/', trim($aNode->attr('href'), '/'));
         $this->number = (int)array_pop($paths);
-        $this->title = $aNode->text();
+        $this->title = Naloader::unescapeText($aNode->text());
 
         $dateNode = $crawler->filter('dt.long_update')->first();
         $this->created_on = Naloader::regulateDateString($dateNode->text());
