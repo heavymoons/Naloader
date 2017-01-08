@@ -21,6 +21,30 @@ class Naloader
     ];
 
     /**
+     * hankaku zenkaku converting options
+     */
+    const HANKAKU_OPTION_NO_CHANGE = 0;
+    const HANKAKU_OPTION_NUMBER_CONVERT_TO_ZENKAKU = 1;
+    const HANKAKU_OPTION_ALPHABET_CONVERT_TO_ZENKAKU = 2;
+    const HANKAKU_OPTION_NUM_AND_ALPHA_CONVERT_TO_ZENKAKU = 3;
+
+    /**
+     * encoding converting options
+     */
+    const ENCODING_OPTION_UTF8 = 'utf-8';
+    const ENCODING_OPTION_UTF16LE = 'unicode';
+    const ENCODING_OPTION_SHIFT_JIS = 'shiftjis';
+    const ENCODING_OPTION_EUC_JP = 'euc-jp';
+    const ENCODING_OPTION_JIS = 'jis';
+
+    /**
+     * line breaks converting options
+     */
+    const LINEBREAK_OPTION_CRLF = 'CRLF';
+    const LINEBREAK_OPTION_CR = 'CR';
+    const LINEBREAK_OPTION_LF = 'LF';
+
+    /**
      * get HTTP client with the auth cookies.
      * @param $url
      * @return Client

@@ -16,19 +16,32 @@ class Novel
     public $url;
     public $title;
     public $author;
-    public $textDownloadUrl;
+    public $textDownloadTopUrl;
     public $chapters;
 
+    /**
+     * Novel constructor.
+     * @param $url
+     * @param null $html
+     */
     public function __construct($url, $html = null) {
         $this->url = $url;
     }
 
+    /**
+     * crawl novel top page
+     */
     public function crawl() {
         $client = Naloader::getHttpClient($this->url);
         $crawler = $client->request('GET', $this->url);
         $this->parseFromCrawler($crawler);
     }
 
+    /**
+     * parse novel top html
+     * @param $url
+     * @param $html
+     */
     public function parseFromHtml($url, $html) {
         $this->url = $url;
         $crawler = new Crawler(null, $this->url);
@@ -36,6 +49,10 @@ class Novel
         $this->parseFromCrawler($crawler);
     }
 
+    /**
+     * parse crawler object of novel top html
+     * @param Crawler $crawler
+     */
     public function parseFromCrawler(Crawler $crawler) {
         $this->title = Naloader::unescapeText($crawler->filter('p.novel_title')->first()->text());
 
@@ -47,7 +64,7 @@ class Novel
         $crawler->filter('ul.undernavi a')->each(function(Crawler $node) {
             $linkUrl = $node->attr('href');
             if (strpos($linkUrl, 'txtdownload') !== false) {
-                $this->textDownloadUrl = $linkUrl;
+                $this->textDownloadTopUrl = $linkUrl;
             }
         });
 
@@ -56,5 +73,13 @@ class Novel
             $chapter = new Chapter($this, $itemNode);
             $this->chapters[] = $chapter;
         });
+    }
+
+    /**
+     * convert text download top url to text download url
+     * @return string
+     */
+    public function getTextDownloadUrl() {
+        return str_replace('/top/', '/dlstart/', $this->textDownloadTopUrl);
     }
 }
