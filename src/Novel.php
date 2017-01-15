@@ -23,8 +23,12 @@ class Novel
      * Novel constructor.
      * @param $url
      * @param null $html
+     * @throws \Exception
      */
     public function __construct($url, $html = null) {
+        if (!Naloader::isValidNovelUrl($url)) {
+            throw new \Exception("invalid novel url: $url");
+        }
         $this->url = $url;
     }
 

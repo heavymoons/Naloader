@@ -29,6 +29,14 @@ class Naloader
     ];
 
     /**
+     * hostname list of author top page
+     */
+    const AUTHOR_TOP_HOST_NAMES = [
+        'mypage.syosetu.com',
+        'xmypage.syosetu.com',
+    ];
+
+    /**
      * hankaku zenkaku converting options
      */
     const HANKAKU_OPTION_NO_CHANGE = 0;
@@ -62,7 +70,20 @@ class Naloader
         array_walk($hostnames, function($hostname) {
             return preg_quote($hostname);
         });
-        return preg_match('/^http:\/\/(' . implode($hostnames, '|') . ')/n\d+\w+\//$', $url);
+        return preg_match('/^http:\/\/(' . implode($hostnames, '|') . ')\/n\d+\w+\/$/', $url);
+    }
+
+    /**
+     * check whether url is valid author url
+     * @param $url
+     * @return int
+     */
+    public static function isValidAuthorUrl($url) {
+        $hostnames = static::AUTHOR_TOP_HOST_NAMES;
+        array_walk($hostnames, function($hostname) {
+            return preg_quote($hostname);
+        });
+        return preg_match('/^http:\/\/(' . implode($hostnames, '|') . ')\/x?\d+\w+\/$/', $url);
     }
 
     /**

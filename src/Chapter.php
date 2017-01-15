@@ -70,6 +70,7 @@ class Chapter
      * @param string $encodingOption
      * @param int $hankakuOption
      * @param string $linebreakOption
+     * @return string
      */
     public function download(
         $encodingOption = Naloader::ENCODING_OPTION_UTF8,

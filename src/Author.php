@@ -21,8 +21,12 @@ class Author
     /**
      * Author constructor.
      * @param $url
+     * @throws \Exception
      */
     public function __construct($url) {
+        if (!Naloader::isValidAuthorUrl($url)) {
+            throw new \Exception("invalid author url: $url");
+        }
         $this->url = $url;
     }
 }
