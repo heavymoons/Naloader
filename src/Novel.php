@@ -60,10 +60,12 @@ class Novel
     public function parseFromCrawler(Crawler $crawler) {
         $this->title = Naloader::unescapeText($crawler->filter('p.novel_title')->first()->text());
 
-        $authorNode = $crawler->filter('div.novel_writername a')->first();
-        $authorUrl = $authorNode->attr('href');
+        $authorNode = $crawler->filter('div.novel_writername')->first();
+        $authorUrl = $crawler->filter('div#novel_footer a')->first()->attr('href');
         $this->author = new Author($authorUrl);
-        $this->author->name = Naloader::unescapeText($authorNode->text());
+        $authorName = trim($authorNode->text());
+        $authorName = mb_substr($authorName, 3, null, 'utf-8'); // "作者："
+        $this->author->name = Naloader::unescapeText($authorName);
 
         $crawler->filter('ul.undernavi a')->each(function(Crawler $node) {
             $linkUrl = $node->attr('href');

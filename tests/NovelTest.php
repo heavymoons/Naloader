@@ -95,5 +95,25 @@ class NovelTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedTextDownloadTopUrl, $novel->textDownloadTopUrl);
         $this->assertEquals($expectedTextDownloadUrl, $novel->getTextDownloadUrl());
         $this->assertEquals($expectedChapterCount, count($novel->chapters));
+
+        $url = 'http://novel18.syosetu.com/n9581dp/';
+
+        $expectedTitle = 'ネクロマンサーでも異世界で少しだけチートできます';
+        $expectedAuthorName = '紙箱ハル';
+        $expectedAuthorUrl = 'http://xmypage.syosetu.com/x3470u/';
+        $expectedTextDownloadTopUrl = 'http://novel18.syosetu.com/txtdownload/top/ncode/939488/';
+        $expectedTextDownloadUrl = 'http://novel18.syosetu.com/txtdownload/dlstart/ncode/939488/';
+        $expectedChapterCount = 134;
+
+        $novel = new \Naloader\Novel($url);
+        $novel->crawl();
+
+        $this->assertEquals($expectedTitle, $novel->title);
+        $this->assertEquals($expectedAuthorName, $novel->author->name);
+        $this->assertEquals($expectedAuthorUrl, $novel->author->url);
+        $this->assertEquals($expectedTextDownloadTopUrl, $novel->textDownloadTopUrl);
+        $this->assertEquals($expectedTextDownloadUrl, $novel->getTextDownloadUrl());
+        $this->assertEquals($expectedChapterCount, count($novel->chapters));
+
     }
 }
