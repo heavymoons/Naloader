@@ -13,10 +13,18 @@ class Naloader
     /**
      * R18 site hostname list.
      */
-    const R18HOSTNAMES = [
+    const R18_HOST_NAMES = [
         'noc.syosetu.com',
         'mnlt.syosetu.com',
         'mid.syosetu.com',
+        'novel18.syosetu.com',
+    ];
+
+    /**
+     * hostname list of novel top page
+     */
+    const NOVEL_TOP_HOST_NAMES = [
+        'ncode.syosetu.com',
         'novel18.syosetu.com',
     ];
 
@@ -45,6 +53,19 @@ class Naloader
     const LINEBREAK_OPTION_LF = 'LF';
 
     /**
+     * check whether url is valid novel top url
+     * @param $url
+     * @return int
+     */
+    public static function isValidNovelUrl($url) {
+        $hostnames = static::NOVEL_TOP_HOST_NAMES;
+        array_walk($hostnames, function($hostname) {
+            return preg_quote($hostname);
+        });
+        return preg_match('/^http:\/\/(' . implode($hostnames, '|') . ')/n\d+\w+\//$', $url);
+    }
+
+    /**
      * get HTTP client with the auth cookies.
      * @param $url
      * @return Client
@@ -64,7 +85,7 @@ class Naloader
      * @return bool
      */
     public static function isR18Url($url) {
-        foreach (static::R18HOSTNAMES as $hostname) {
+        foreach (static::R18_HOST_NAMES as $hostname) {
             if (strpos($url, $hostname) !== false) {return true;}
         }
         return false;
