@@ -64,28 +64,4 @@ class Chapter
         $updateNode = $dateNode->filter('span')->first();
         $this->updated_on = $updateNode->count() ? Naloader::regulateDateString($updateNode->attr('title')) : null;
     }
-
-    /**
-     * download text
-     * @param string $encodingOption
-     * @param int $hankakuOption
-     * @param string $linebreakOption
-     * @return string
-     */
-    public function download(
-        $encodingOption = Naloader::ENCODING_OPTION_UTF8,
-        $hankakuOption = Naloader::HANKAKU_OPTION_NO_CHANGE,
-        $linebreakOption = Naloader::LINEBREAK_OPTION_CRLF
-    ) {
-        $downloadUrl = $this->novel->getTextDownloadUrl();
-        $params = [
-            'no' => $this->number,
-            'code' => $encodingOption,
-            'hankaku' => $hankakuOption,
-            'kaigyo' => $linebreakOption,
-        ];
-        $url = $downloadUrl . '?' . http_build_query($params);
-        $text = file_get_contents($url);
-        return Naloader::unescapeText($text);
-    }
 }

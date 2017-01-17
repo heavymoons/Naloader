@@ -14,9 +14,25 @@ class Novel
      * @var string
      */
     public $url;
+
+    /**
+     * @var string
+     */
     public $title;
+
+    /**
+     * @var Author
+     */
     public $author;
+
+    /**
+     * @var string
+     */
     public $textDownloadTopUrl;
+
+    /**
+     * @var array
+     */
     public $chapters;
 
     /**
