@@ -52,7 +52,28 @@ class Chapter
      * parse from the chapter node in a novel html page.
      * @param Crawler $crawler
      */
-    public function parseFromCrawler(Crawler $crawler) {
+    public function parseFromCrawler(Crawler $crawler)
+    {
+        if ($crawler->attr('id') == 'novel_honbun') {
+            $this->parseFromCrawlerForContent($crawler);
+        } else {
+            $this->parseFromCrawlerForChapterItem($crawler);
+        }
+    }
+
+    /**
+     * paarse from the novel page with the only single chapter
+     * @param Crawler $crawler
+     */
+    public function parseFromCrawlerForContent(Crawler $crawler)
+    {
+        $this->number = 1;
+        $this->title = null;
+        $this->created_on = Carbon::now();
+        $this->updated_on = null;
+    }
+
+    public function parseFromCrawlerForChapterItem(Crawler $crawler) {
         $aNode = $crawler->filter('a')->first();
         $paths = explode('/', trim($aNode->attr('href'), '/'));
         $this->number = (int)array_pop($paths);

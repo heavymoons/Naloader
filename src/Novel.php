@@ -95,6 +95,11 @@ class Novel
             $chapter = new Chapter($this, $itemNode);
             $this->chapters[] = $chapter;
         });
+        if (empty($this->chapters)) {
+            $contentNode = $crawler->filter('div#novel_honbun')->first();
+            $chapter = new Chapter($this, $contentNode);
+            $this->chapters[] = $chapter;
+        }
     }
 
     /**

@@ -96,14 +96,14 @@ class NovelTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedTextDownloadUrl, $novel->getTextDownloadUrl());
         $this->assertEquals($expectedChapterCount, count($novel->chapters));
 
-        $url = 'http://novel18.syosetu.com/n9581dp/';
+        $url = 'http://novel18.syosetu.com/n7803cs/';
 
-        $expectedTitle = 'ネクロマンサーでも異世界で少しだけチートできます';
-        $expectedAuthorName = '紙箱ハル';
-        $expectedAuthorUrl = 'http://xmypage.syosetu.com/x3470u/';
-        $expectedTextDownloadTopUrl = 'http://novel18.syosetu.com/txtdownload/top/ncode/939488/';
-        $expectedTextDownloadUrl = 'http://novel18.syosetu.com/txtdownload/dlstart/ncode/939488/';
-        $expectedChapterCount = 134;
+        $expectedTitle = '最凶魔術師の異常なる逃亡生活';
+        $expectedAuthorName = 'ピンク色伯爵';
+        $expectedAuthorUrl = 'http://xmypage.syosetu.com/x7234n/';
+        $expectedTextDownloadTopUrl = 'http://novel18.syosetu.com/txtdownload/top/ncode/707733/';
+        $expectedTextDownloadUrl = 'http://novel18.syosetu.com/txtdownload/dlstart/ncode/707733/';
+        $expectedChapterCount = 190;
 
         $novel = new \Naloader\Novel($url);
         $novel->crawl();
@@ -114,6 +114,26 @@ class NovelTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedTextDownloadTopUrl, $novel->textDownloadTopUrl);
         $this->assertEquals($expectedTextDownloadUrl, $novel->getTextDownloadUrl());
         $this->assertEquals($expectedChapterCount, count($novel->chapters));
+    }
 
+    public function testScrapeSingleContent() {
+        $url = 'http://novel18.syosetu.com/n4874dd/';
+
+        $expectedTitle = '引きこもり少女は俺専用の肉便器';
+        $expectedAuthorName = 'アルトワ';
+        $expectedAuthorUrl = 'http://xmypage.syosetu.com/x0452b/';
+        $expectedTextDownloadTopUrl = 'http://novel18.syosetu.com/txtdownload/top/ncode/814793/';
+        $expectedTextDownloadUrl = 'http://novel18.syosetu.com/txtdownload/dlstart/ncode/814793/';
+        $expectedChapterCount = 1;
+
+        $novel = new \Naloader\Novel($url);
+        $novel->crawl();
+
+        $this->assertEquals($expectedTitle, $novel->title);
+        $this->assertEquals($expectedAuthorName, $novel->author->name);
+        $this->assertEquals($expectedAuthorUrl, $novel->author->url);
+        $this->assertEquals($expectedTextDownloadTopUrl, $novel->textDownloadTopUrl);
+        $this->assertEquals($expectedTextDownloadUrl, $novel->getTextDownloadUrl());
+        $this->assertEquals($expectedChapterCount, count($novel->chapters));
     }
 }
