@@ -47,7 +47,7 @@ class Naloader
         array_walk($hostnames, function($hostname) {
             return preg_quote($hostname);
         });
-        return preg_match('/^http:\/\/(' . implode($hostnames, '|') . ')\/n\d+\w+\/$/', $url);
+        return preg_match('/^https?:\/\/(' . implode($hostnames, '|') . ')\/n\d+\w+\/$/', $url);
     }
 
     /**
@@ -60,7 +60,7 @@ class Naloader
         array_walk($hostnames, function($hostname) {
             return preg_quote($hostname);
         });
-        return preg_match('/^http:\/\/(' . implode($hostnames, '|') . ')\/x?\d+\w+\/$/', $url);
+        return preg_match('/^https?:\/\/(' . implode($hostnames, '|') . ')\/x?\d+\w+\/$/', $url);
     }
 
     /**
