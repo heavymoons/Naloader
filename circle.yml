@@ -1,10 +1,12 @@
 dependencies:
     pre:
         - echo "date.timezone = Asia/Tokyo" > /opt/circleci/php/$(phpenv global)/etc/conf.d/date.ini
-jobs:
-  build:
-    docker:
-      - image: circleci/php:7.0-browsers
-    steps:
-      - checkout
-      - run: sudo apt-get install php7.0-intl
+machine:
+  pre:
+    - sudo apt-get update; USE_PRECOMPILE=true sudo -E circleci-install php 7.1.0
+  php:
+    version: 7.1.0
+
+test:
+  override:
+    - php --version
